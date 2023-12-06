@@ -1,4 +1,5 @@
-﻿using Captcha.Models;
+﻿using Captcha.Datas;
+using Captcha.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,17 @@ namespace Captcha.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MyDbContext _db;
+        public HomeController(ILogger<HomeController> logger,MyDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ViewBag.tt=_db.TTs.ToList();
+            return View(ViewBag.tt);
         }
 
         public IActionResult Privacy()

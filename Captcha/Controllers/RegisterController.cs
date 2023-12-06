@@ -36,7 +36,7 @@ namespace Captcha.Controllers
                 };
                 _db.TTs.Add(newtt);
                 _db.SaveChanges();
-                return Redirect("https://localhost:7010/");
+                return Redirect("https://localhost:7010/Home");
             }
             else return BadRequest(ModelState);
         }
