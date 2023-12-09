@@ -1,0 +1,77 @@
+﻿@model Captcha.Models.TTModel
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+<div class="row justify-content-md-center">
+    <div class="col-md-5">
+        @using (Html.BeginForm("PostTT", "Register", FormMethod.Post))
+        {
+            //@Html.ValidationSummary()
+            @Html.AntiForgeryToken()
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Register</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Fullname)
+                        @Html.TextBoxFor(m => m.Fullname, "", new { @class = "form-control", @placeholder = "Họ tên" })
+                        @Html.ValidationMessageFor(m => m.Fullname, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Sexual)
+                        @Html.TextBoxFor(m => m.Sexual, "", new { @class = "form-control", @placeholder = "Giới tính" })
+                        @Html.ValidationMessageFor(m => m.Sexual, "", new { @class = "badge badge-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Age)
+                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "Tuổi" })
+                        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Country)
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @placeholder = "Quê quán" })
+                        @Html.ValidationMessageFor(m => m.Country, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <dnt-captcha asp-captcha-generator-max="999999"
+                                 asp-captcha-generator-min="111111"
+                                 asp-captcha-generator-language="English"
+                                 asp-captcha-generator-display-mode="ShowDigits"
+                                 asp-use-relative-urls="true"
+                                 asp-placeholder="Enter Captcha"
+                                 asp-validation-error-message="Please enter the security code."
+                                 asp-font-name="Tahoma"
+                                 asp-font-size="20"
+                                 asp-fore-color="#333333"
+                                 asp-back-color="#ccc"
+                                 asp-text-box-class="text-box form-control"
+                                 asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                 asp-validation-message-class="text-danger"
+                                 asp-refresh-button-class="fas fa-redo btn-sm"
+                                 asp-use-noise="false" />
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
